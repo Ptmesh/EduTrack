@@ -19,11 +19,15 @@ EduTrack is a web-based educational management system designed to streamline adm
 
 - **Frontend**: React.js, Styled Components
 - **Backend**: Node.js, Express.js
-- **Database**: MongoDB
+- **Database**: Postgre
 - **Authentication**: JSON Web Tokens (JWT)
 - **Routing**: React Router
 - **State Management**: React Context API
 - **UI Framework**: Material-UI
+  **Additional Tools**:
+- Axios for HTTP requests
+- CORS (Cross-Origin Resource Sharing) for enabling cross-origin requests
+
 
 ## Usage
 
