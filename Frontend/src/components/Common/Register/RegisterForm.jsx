@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useAuth } from "../../../context/AuthContext";
 
 const RegisterFormContainer = styled.div`
   background-color: #f8f9fa;
@@ -56,7 +55,6 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
-  const { login } = useAuth();
   const navigate = useNavigate();
 
   const URL = "http://localhost:3000";

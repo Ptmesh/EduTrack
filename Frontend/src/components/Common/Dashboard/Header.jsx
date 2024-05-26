@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useAuth } from "../../../context/AuthContext";
 
 const Container = styled.div`
   display: flex;
@@ -70,7 +69,6 @@ const WelcomeMessage = styled.div`
 
 const Nav = () => {
   const navigate = useNavigate();
-  const { logout, isAuthenticated, username } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -82,9 +80,7 @@ const Nav = () => {
       <RightContainer>
         <SearchBar placeholder="Search..." />
         <NotificationIcon>Icon</NotificationIcon>
-        {isAuthenticated && (
-          <WelcomeMessage>Welcome, {username}!</WelcomeMessage>
-        )}
+        <WelcomeMessage>Welcome, {username}!</WelcomeMessage>
         <LogoutButton onClick={handleLogout}>Logout</LogoutButton>
       </RightContainer>
     </Container>

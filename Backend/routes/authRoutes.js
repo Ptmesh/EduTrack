@@ -25,6 +25,9 @@ router.post("/register", async (req, res) => {
       [username, hashedPassword, email, role]
     );
     res.status(201).json({ message: "User registered successfully" });
+    req.session.userId = user.rows[0].id;
+    req.session.username = user.rows[0].username;
+    req.session.role = user.rows[0].role;
   } catch (error) {
     console.error("Error registering user:", error);
     res.status(500).json({ error: "Internal server error" });

@@ -11,11 +11,11 @@ const Container = styled.div`
   align-items: center;
   padding: 30px;
   background-color: #0a1128;
-  height: 100vh;
   color: white;
   width: 20%;
+  overflow-y: auto;
   transition: transform 0.3s ease-in-out;
-
+  height: 100vh;
   @media (max-width: 768px) {
     position: fixed;
     top: 0;
@@ -41,14 +41,15 @@ const LogoContainer = styled.div`
 
 const MenuItems = styled.div`
   width: 100%;
-  height: 60%;
   overflow-y: auto;
+  height: 60%;
 `;
 
 const SVGContainer = styled.img`
   height: 120px;
   width: 100%;
 `;
+
 const ItemContainer = styled(Link)`
   display: flex;
   align-items: center;
@@ -57,36 +58,85 @@ const ItemContainer = styled(Link)`
   text-decoration: none;
   transition: background-color 0.3s ease;
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+  &.active {
+    background-color: #0077b6;
   }
 `;
 
 const SideBar = () => {
+  const { role } = useAuth();
+
+  const getMenuItems = () => {
+    if (role === "admin") {
+      return (
+        <>
+          <ItemContainer to="/manage-users">
+            <Item name="Manage Users" icon="👥" />
+          </ItemContainer>
+          <ItemContainer to="/manage-course">
+            <Item name="Manage Courses" icon="📚" />
+          </ItemContainer>
+          <ItemContainer to="/manage-test">
+            <Item name="Manage Tests" icon="📝" />
+          </ItemContainer>
+          <ItemContainer to="/grades">
+            <Item name="Manage Grades" icon="🎓" />
+          </ItemContainer>
+          <ItemContainer to="/analytics">
+            <Item name="Analytics" icon="📊" />
+          </ItemContainer>
+          <ItemContainer to="/settings">
+            <Item name="Settings" icon="⚙️" />
+          </ItemContainer>
+        </>
+      );
+    } else if (role === "teacher") {
+      return (
+        <>
+          <ItemContainer to="/view-courses">
+            <Item name="View Courses" icon="👀" />
+          </ItemContainer>
+          <ItemContainer to="/manage-assignments">
+            <Item name="Manage Assignments" icon="📝" />
+          </ItemContainer>
+          <ItemContainer to="/gradebook">
+            <Item name="Gradebook" icon="📊" />
+          </ItemContainer>
+          <ItemContainer to="/communication">
+            <Item name="Communication" icon="📧" />
+          </ItemContainer>
+          <ItemContainer to="/class-materials">
+            <Item name="Class Materials" icon="📎" />
+          </ItemContainer>
+        </>
+      );
+    } else if (role === "student") {
+      return (
+        <>
+          <ItemContainer to="/mycourses">
+            <Item name="My Courses" icon="📚" />
+          </ItemContainer>
+          <ItemContainer to="/assignments">
+            <Item name="Assignments" icon="📝" />
+          </ItemContainer>
+          <ItemContainer to="/grades">
+            <Item name="Grades" icon="📊" />
+          </ItemContainer>
+          <ItemContainer to="/study-materials">
+            <Item name="Study Materials" icon="📖" />
+          </ItemContainer>
+          <ItemContainer to="/profile">
+            <Item name="Profile" icon="👤" />
+          </ItemContainer>
+        </>
+      );
+    }
+  };
+
   return (
     <Container>
       <LogoContainer>HappyPerformer</LogoContainer>
-      <ItemContainer>
-        <MenuItems>
-          <Item name="Manage Users" icon="👥" />
-          <Item name="Manage Courses" icon="📚" />
-          <Item name="Manage Tests" icon="📝" />
-          <Item name="Manage Grades" icon="🎓" />
-          <Item name="Analytics" icon="📊" />
-          <Item name="Settings" icon="⚙️" />
-          <Item name="View Courses" icon="👀" />
-          <Item name="Manage Assignments" icon="📝" />
-          <Item name="Gradebook" icon="📊" />
-          <Item name="Communication" icon="📧" />
-          <Item name="Class Materials" icon="📎" />
-          <Item name="My Courses" icon="📚" />
-          <Item name="Assignments" icon="📝" />
-          <Item name="Grades" icon="📊" />
-          <Item name="Study Materials" icon="📖" />
-          <Item name="Communication" icon="📧" />
-          <Item name="Profile" icon="👤" />
-        </MenuItems>
-      </ItemContainer>
+      <MenuItems>{getMenuItems()}</MenuItems>
       <SVGContainer src={Coder} />
     </Container>
   );

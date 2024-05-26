@@ -11,7 +11,6 @@ const Container = styled.div`
   justify-content: flex-start;
   width: 90%;
   &:hover {
-    background-color: #001f54;
     cursor: pointer;
     color: white;
     transition: all 0.5s ease;
